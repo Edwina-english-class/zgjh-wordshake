@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordShake 英語競賽 — 畢業挑戰</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#f59e0b;--gold-light:#fef3c7;--gold-dark:#d97706;
+  --blue:#2563eb;--blue-dark:#1d4ed8;--blue-light:#dbeafe;
+  --green:#059669;--green-light:#d1fae5;
+  --red:#dc2626;--red-light:#fee2e2;
+  --purple:#7c3aed;--purple-light:#ede9fe;
+  --gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;
+  --gray-400:#9ca3af;--gray-500:#6b7280;--gray-600:#4b5563;
+  --gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;
+  --radius:10px;--radius-lg:16px;--radius-xl:24px;
+  --shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+body{font-family:'Nunito',sans-serif;background:#f0f4ff;min-height:100vh;color:var(--gray-800)}
+
+/* NAV */
+.nav{background:#fff;border-bottom:2px solid var(--gray-100);padding:0 24px;display:flex;align-items:center;height:64px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+.nav-logo{font-family:'Fredoka One',sans-serif;font-size:22px;color:var(--blue)}
+.nav-logo span{color:var(--gold)}
+.nav-sub{font-size:12px;color:var(--gray-500);font-weight:600;margin-top:1px}
+
+/* MAIN */
+.main{padding:28px 24px;max-width:1080px;margin:0 auto}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 50%,#7c3aed 100%);border-radius:var(--radius-xl);padding:40px 36px 36px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.06)}
+.hero::after{content:'';position:absolute;bottom:-40px;left:40%;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:5px 14px;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:'Fredoka One',sans-serif;font-size:36px;letter-spacing:1px;margin-bottom:8px;line-height:1.15}
+.hero h1 span{color:var(--gold)}
+.hero-desc{font-size:14px;opacity:.85;max-width:520px;line-height:1.7;margin-bottom:20px}
+.hero-meta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.hero-meta-item{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;background:rgba(255,255,255,.12);border-radius:20px;padding:6px 14px}
+.play-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#1a1a1a;padding:12px 24px;border-radius:30px;font-size:14px;font-weight:800;text-decoration:none;transition:all .2s;font-family:'Nunito',sans-serif}
+.play-btn:hover{background:#fbbf24;transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,158,11,.4)}
+
+/* RULES */
+.rules-box{background:#fff;border:2px solid var(--blue-light);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:32px}
+.rules-title{font-family:'Fredoka One',sans-serif;font-size:18px;color:var(--blue);margin-bottom:16px}
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:600px){.rules-grid{grid-template-columns:1fr}}
+.rules-col h4{font-size:12px;font-weight:800;color:var(--gray-700);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.rules-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.rules-list li{font-size:13px;color:var(--gray-600);display:flex;align-items:baseline;gap:8px;line-height:1.5}
+.rules-list li::before{content:'›';color:var(--blue);font-weight:800;font-size:16px;flex-shrink:0}
+.score-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.score-chip{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:var(--blue-light);color:var(--blue)}
+
+/* SECTION TITLE */
+.section-title{font-family:'Fredoka One',sans-serif;font-size:22px;color:var(--gray-900);margin-bottom:20px}
+
+/* GROUP CARDS */
+.groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;margin-bottom:40px}
+@media(max-width:640px){.groups{grid-template-columns:1fr}}
+.group-card{border-radius:var(--radius-lg);border:2px solid;padding:26px;position:relative;overflow:hidden;transition:box-shadow .2s}
+.group-card:hover{box-shadow:var(--shadow-lg)}
+.group-card::before{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;opacity:.1}
+.group-awesome{background:#fffbeb;border-color:#fcd34d}.group-awesome::before{background:var(--gold)}
+.group-brilliant{background:#eff6ff;border-color:#93c5fd}.group-brilliant::before{background:var(--blue)}
+.group-creative{background:#f5f3ff;border-color:#c4b5fd}.group-creative::before{background:var(--purple)}
+.group-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.group-emoji{font-size:38px;line-height:1}
+.group-name{font-family:'Fredoka One',sans-serif;font-size:24px;line-height:1.1}
+.group-awesome .group-name{color:var(--gold-dark)}
+.group-brilliant .group-name{color:var(--blue-dark)}
+.group-creative .group-name{color:var(--purple)}
+.group-range{font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-top:5px}
+.group-awesome .group-range{background:var(--gold);color:#92400e}
+.group-brilliant .group-range{background:var(--blue);color:#fff}
+.group-creative .group-range{background:var(--purple);color:#fff}
+.group-desc{font-size:13px;color:var(--gray-600);margin-bottom:14px;line-height:1.6}
+.reward-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.05);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;color:var(--gray-700);margin-bottom:16px}
+
+/* UPLOAD FORM */
+.upload-form{background:#fff;border-radius:var(--radius);padding:18px;border:1px solid rgba(0,0,0,.08)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+@media(max-width:400px){.form-row{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:5px}
+label{font-size:11px;font-weight:800;color:var(--gray-600);text-transform:uppercase;letter-spacing:.4px}
+.req{color:var(--red)}
+input[type=text],input[type=number]{width:100%;padding:9px 12px;border:2px solid var(--gray-200);border-radius:var(--radius);font-size:13px;font-family:'Nunito',sans-serif;color:var(--gray-800);background:#fff;outline:none;transition:border .15s;font-weight:600}
+input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+
+.upload-zone{border:2px dashed var(--gray-300);border-radius:var(--radius);padding:18px;text-align:center;cursor:pointer;transition:all .2s;margin:10px 0}
+.upload-zone:hover,.upload-zone.dragover{border-color:var(--blue);background:var(--blue-light)}
+.upload-zone.has-file{border-color:var(--green);background:var(--green-light);border-style:solid}
+.upload-zone input{display:none}
+.upload-zone-icon{font-size:26px;margin-bottom:4px}
+.upload-zone-text{font-size:12px;font-weight:700;color:var(--gray-600)}
+.upload-zone-hint{font-size:11px;color:var(--gray-400);margin-top:2px}
+.preview-wrap{margin:8px 0 12px;text-align:center}
+.preview-wrap img{max-width:100%;max-height:130px;border-radius:8px;object-fit:contain;border:1px solid var(--gray-200)}
+.preview-name{font-size:11px;color:var(--gray-500);margin-top:4px}
+
+/* BUTTONS */
+.btn{padding:10px 20px;border-radius:30px;border:none;font-size:13px;font-weight:800;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px;font-family:'Nunito',sans-serif;width:100%;justify-content:center}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-awesome{background:var(--gold);color:#92400e}.btn-awesome:hover:not(:disabled){background:var(--gold-dark)}
+.btn-brilliant{background:var(--blue);color:#fff}.btn-brilliant:hover:not(:disabled){background:var(--blue-dark)}
+.btn-creative{background:var(--purple);color:#fff}.btn-creative:hover:not(:disabled){background:#6d28d9}
+.spinner{width:16px;height:16px;border:2px solid rgba(0,0,0,.15);border-top-color:rgba(0,0,0,.5);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.btn-awesome .spinner{border-color:rgba(146,64,14,.2);border-top-color:#92400e}
+.btn-brilliant .spinner,.btn-creative .spinner{border-color:rgba(255,255,255,.3);border-top-color:#fff}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* SUCCESS OVERLAY */
+.success-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:20px}
+.success-overlay.open{display:flex}
+.success-card{background:#fff;border-radius:var(--radius-xl);padding:40px 36px;text-align:center;max-width:420px;width:100%;box-shadow:var(--shadow-lg);animation:popIn .3s ease}
+@keyframes popIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.success-icon{font-size:64px;margin-bottom:16px}
+.success-title{font-family:'Fredoka One',sans-serif;font-size:26px;color:var(--green);margin-bottom:8px}
+.success-msg{font-size:14px;color:var(--gray-600);line-height:1.7;margin-bottom:24px}
+.success-close{background:var(--green);color:#fff;padding:11px 28px;border-radius:30px;border:none;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:background .2s}
+.success-close:hover{background:#047857}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;padding:13px 20px;border-radius:var(--radius-lg);font-size:13px;font-weight:700;font-family:'Nunito',sans-serif;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;color:#fff;max-width:340px;box-shadow:var(--shadow-lg)}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.error{background:var(--red)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div>
+    <div class="nav-logo">Word<span>Shake</span> 🌟</div>
+    <div class="nav-sub">英語畢業競賽成果上傳</div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">🎓 畢業特別活動</div>
+    <h1>WordShake <span>英語</span> 單字競賽</h1>
+    <p class="hero-desc">在 British Council 的 WordShake 遊戲中大展身手！拼出最多單字，闖進前 15 名，贏得畢業驚喜獎勵！</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">🏆 每組前 15 名獲獎</div>
+      <div class="hero-meta-item">📅 獎勵發放 5/29 週五</div>
+      <div class="hero-meta-item">⏱️ 限時競賽</div>
+    </div>
+    <a class="play-btn" href="https://learnenglish.britishcouncil.org/free-resources/vocabulary/games/wordshake" target="_blank">
+      🎮 前往遊戲網站
+    </a>
+  </div>
+
+  <!-- RULES -->
+  <div class="rules-box">
+    <div class="rules-title">📖 遊戲規則說明</div>
+    <div class="rules-grid">
+      <div>
+        <h4>🕹️ 遊玩方式</h4>
+        <ul class="rules-list">
+          <li>遊戲開始時出現 4×4 字母網格（共 16 個字母）</li>
+          <li>需拼出真實英文單字，系統以 52,000 詞庫核對</li>
+          <li>單字長度必須介於 <strong>3 到 7 個字母</strong></li>
+          <li>可從網格任意位置選字母，依正確拼寫順序點擊</li>
+          <li>同一位置字母在同一單字中 <strong>不可重複使用</strong></li>
+        </ul>
+      </div>
+      <div>
+        <h4>💯 計分方式</h4>
+        <div class="score-chips">
+          <span class="score-chip">3 字母 = 1 分</span>
+          <span class="score-chip">4 字母 = 2 分</span>
+          <span class="score-chip">5 字母 = 3 分</span>
+          <span class="score-chip">6 字母 = 4 分</span>
+          <span class="score-chip">7 字母 = 7 分</span>
+        </div>
+        <br>
+        <h4>📸 上傳須知</h4>
+        <ul class="rules-list">
+          <li>截圖遊戲結果畫面</li>
+          <li>在圖片上手寫 <strong>班級與座號</strong></li>
+          <li>依據畢業考成績選擇對應組別上傳</li>
+          <li>班級、座號、姓名、分數、圖片 <strong>缺一不可</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPLOAD -->
+  <div class="section-title">📤 選擇組別上傳成果</div>
+  <div class="groups">
+
+    <!-- AWESOME -->
+    <div class="group-card group-awesome">
+      <div class="group-header">
+        <div class="group-emoji">🏅</div>
+        <div>
+          <div class="group-name">Awesome</div>
+          <span class="group-range">畢業考 85 ~ 100 分</span>
+        </div>
+      </div>
+      <p class="group-desc">你是英語高手！在競賽中繼續展現你的實力，衝進排行榜前 15 名！</p>
+      <div class="reward-tag">🎁 前 15 名 · 獎勵發放 5/29 (五)</div>
+      <div class="upload-form">
+        <div class="form-row">
+          <div class="form-group"><label>班級 <span class="req">*</span></label><input type="text" id="a-class" placeholder="如：309"></div>
+          <div class="form-group"><label>座號 <span class="req">*</span></label><input type="number" id="a-seat" placeholder="如：12" min="1" max="50"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>姓名 <span class="req">*</span></label><input type="text" id="a-name" placeholder="請輸入姓名"></div>
+          <div class="form-group"><label>WordShake 分數 <span class="req">*</span></label><input type="number" id="a-score" placeholder="遊戲分數" min="0"></div>
+        </div>
+        <div class="upload-zone" id="zone-a" onclick="document.getElementById('file-a').click()">
+          <div class="upload-zone-icon">📷</div>
+          <div class="upload-zone-text">點擊或拖曳上傳截圖</div>
+          <div class="upload-zone-hint">JPG / PNG，最大 2MB（需手寫班級座號）</div>
+          <input type="file" id="file-a" accept="image/*" onchange="handleFile('a',this)">
+        </div>
+        <div id="preview-a" style="display:none" class="preview-wrap">
+          <img id="previewImg-a" alt="預覽"><p id="fileName-a" class="preview-name"></p>
+        </div>
+        <button class="btn btn-awesome" id="btn-a" onclick="submitForm('a','Awesome')">🏅 提交至 Awesome 組</button>
+      </div>
+    </div>
+
+    <!-- BRILLIANT -->
+    <div class="group-card group-brilliant">
+      <div class="group-header">
+        <div class="group-emoji">⭐</div>
+        <div>
+          <div class="group-name">Brilliant</div>
+          <span class="group-range">畢業考 60 ~ 84 分</span>
+        </div>
+      </div>
+      <p class="group-desc">你的英語能力閃閃發光！把握這次機會，在同組競賽中脫穎而出！</p>
+      <div class="reward-tag">🎁 前 15 名 · 獎勵發放 5/29 (五)</div>
+      <div class="upload-form">
+        <div class="form-row">
+          <div class="form-group"><label>班級 <span class="req">*</span></label><input type="text" id="b-class" placeholder="如：309"></div>
+          <div class="form-group"><label>座號 <span class="req">*</span></label><input type="number" id="b-seat" placeholder="如：12" min="1" max="50"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>姓名 <span class="req">*</span></label><input type="text" id="b-name" placeholder="請輸入姓名"></div>
+          <div class="form-group"><label>WordShake 分數 <span class="req">*</span></label><input type="number" id="b-score" placeholder="遊戲分數" min="0"></div>
+        </div>
+        <div class="upload-zone" id="zone-b" onclick="document.getElementById('file-b').click()">
+          <div class="upload-zone-icon">📷</div>
+          <div class="upload-zone-text">點擊或拖曳上傳截圖</div>
+          <div class="upload-zone-hint">JPG / PNG，最大 2MB（需手寫班級座號）</div>
+          <input type="file" id="file-b" accept="image/*" onchange="handleFile('b',this)">
+        </div>
+        <div id="preview-b" style="display:none" class="preview-wrap">
+          <img id="previewImg-b" alt="預覽"><p id="fileName-b" class="preview-name"></p>
+        </div>
+        <button class="btn btn-brilliant" id="btn-b" onclick="submitForm('b','Brilliant')">⭐ 提交至 Brilliant 組</button>
+      </div>
+    </div>
+
+    <!-- CREATIVE -->
+    <div class="group-card group-creative">
+      <div class="group-header">
+        <div class="group-emoji">🌈</div>
+        <div>
+          <div class="group-name">Creative</div>
+          <span class="group-range">畢業考 60 分以下</span>
+        </div>
+      </div>
+      <p class="group-desc">創意無限的你！用你獨特的方式挑戰 WordShake，一樣有機會贏得大獎！</p>
+      <div class="reward-tag">🎁 前 15 名 · 獎勵發放 5/29 (五)</div>
+      <div class="upload-form">
+        <div class="form-row">
+          <div class="form-group"><label>班級 <span class="req">*</span></label><input type="text" id="c-class" placeholder="如：309"></div>
+          <div class="form-group"><label>座號 <span class="req">*</span></label><input type="number" id="c-seat" placeholder="如：12" min="1" max="50"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>姓名 <span class="req">*</span></label><input type="text" id="c-name" placeholder="請輸入姓名"></div>
+          <div class="form-group"><label>WordShake 分數 <span class="req">*</span></label><input type="number" id="c-score" placeholder="遊戲分數" min="0"></div>
+        </div>
+        <div class="upload-zone" id="zone-c" onclick="document.getElementById('file-c').click()">
+          <div class="upload-zone-icon">📷</div>
+          <div class="upload-zone-text">點擊或拖曳上傳截圖</div>
+          <div class="upload-zone-hint">JPG / PNG，最大 2MB（需手寫班級座號）</div>
+          <input type="file" id="file-c" accept="image/*" onchange="handleFile('c',this)">
+        </div>
+        <div id="preview-c" style="display:none" class="preview-wrap">
+          <img id="previewImg-c" alt="預覽"><p id="fileName-c" class="preview-name"></p>
+        </div>
+        <button class="btn btn-creative" id="btn-c" onclick="submitForm('c','Creative')">🌈 提交至 Creative 組</button>
+      </div>
+    </div>
+
+  </div><!-- /groups -->
+</div><!-- /main -->
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="success-overlay">
+  <div class="success-card">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">上傳成功！</div>
+    <div class="success-msg" id="success-msg">你的成果已成功提交！<br>老師會審核後公布前 15 名名單，<br>獎勵將於 <strong>5/29（五）</strong> 發放。</div>
+    <button class="success-close" onclick="document.getElementById('success-overlay').classList.remove('open')">好的，我知道了 👍</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbwhyHZYeJptxzRCym3DGn22M6ALoTTyRJRrUdK0p98cA0w5AcWw205U2dBbDmhfu2Gr/exec';
+
+// ── FILE HANDLING ──────────────────────────────────────────
+function handleFile(cat, input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) {
+    showToast('圖片大小不能超過 2MB，請壓縮後再上傳');
+    input.value = '';
+    return;
+  }
+  document.getElementById('zone-' + cat).classList.add('has-file');
+  const prevWrap = document.getElementById('preview-' + cat);
+  const prevImg  = document.getElementById('previewImg-' + cat);
+  const prevName = document.getElementById('fileName-' + cat);
+  prevWrap.style.display = 'block';
+  prevName.textContent = file.name;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const tmpImg = new Image();
+    tmpImg.onload = () => {
+      const canvas = document.createElement('canvas');
+      const MAX = 600;
+      let w = tmpImg.width, h = tmpImg.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(tmpImg, 0, 0, w, h);
+      prevImg.src = canvas.toDataURL('image/jpeg', 0.8);
+    };
+    tmpImg.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// Drag & drop
+['a','b','c'].forEach(cat => {
+  const zone = document.getElementById('zone-' + cat);
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (!file || !file.type.startsWith('image/')) return;
+    const inp = document.getElementById('file-' + cat);
+    const dt = new DataTransfer(); dt.items.add(file); inp.files = dt.files;
+    handleFile(cat, inp);
+  });
+});
+
+// ── SUBMIT ─────────────────────────────────────────────────
+async function submitForm(cat, groupName) {
+  const cls   = document.getElementById(cat + '-class').value.trim();
+  const seat  = document.getElementById(cat + '-seat').value.trim();
+  const name  = document.getElementById(cat + '-name').value.trim();
+  const score = document.getElementById(cat + '-score').value.trim();
+  const previewImg = document.getElementById('previewImg-' + cat);
+  const hasImg = previewImg.src && previewImg.src.startsWith('data:');
+
+  if (!cls)   { showToast('請填寫班級！'); return; }
+  if (!seat)  { showToast('請填寫座號！'); return; }
+  if (!name)  { showToast('請填寫姓名！'); return; }
+  if (!score) { showToast('請填寫 WordShake 分數！'); return; }
+  if (parseInt(score) < 0) { showToast('分數不能為負數！'); return; }
+  if (!hasImg){ showToast('請上傳遊戲截圖（必填）！'); return; }
+
+  const btn = document.getElementById('btn-' + cat);
+  const origHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> 上傳中，請稍候...';
+
+  const record = {
+    group: groupName,
+    className: cls,
+    seat: parseInt(seat),
+    name: name,
+    score: parseInt(score),
+    time: new Date().toISOString(),
+    img: previewImg.src,
+    imgName: document.getElementById('fileName-' + cat).textContent
+  };
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'add', record })
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || '伺服器錯誤');
+
+    // 成功！
+    resetForm(cat);
+    document.getElementById('success-msg').innerHTML =
+      `<strong>${name}</strong> 同學，你的成果已成功提交到 <strong>${groupName}</strong> 組！<br><br>` +
+      `老師會審核後公布前 15 名名單，<br>獎勵將於 <strong>5/29（五）</strong> 發放，加油！🎊`;
+    document.getElementById('success-overlay').classList.add('open');
+
+  } catch (e) {
+    showToast('上傳失敗，請重試：' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = origHTML;
+  }
+}
+
+function resetForm(cat) {
+  ['class','seat','name','score'].forEach(f => document.getElementById(cat + '-' + f).value = '');
+  document.getElementById('zone-' + cat).classList.remove('has-file');
+  document.getElementById('preview-' + cat).style.display = 'none';
+  document.getElementById('file-' + cat).value = '';
+  document.getElementById('previewImg-' + cat).src = '';
+}
+
+// ── TOAST ──────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show error';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.className = 'toast', 3500);
+}
+</script>
+</body>
+</html>
