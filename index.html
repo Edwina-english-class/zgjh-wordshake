@@ -146,10 +146,10 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
   <div class="hero">
     <div class="hero-badge">🎓 畢業特別活動</div>
     <h1>WordShake <span>英語</span> 單字競賽</h1>
-    <p class="hero-desc">在 British Council 的 WordShake 遊戲中大展身手！拼出最多單字，闖進前 15 名，贏得畢業驚喜獎勵！</p>
+    <p class="hero-desc">在 British Council 的 WordShake 遊戲中大展身手！拼出最多單字，闖進前 20 名，贏得畢業驚喜獎勵！</p>
     <div class="hero-meta">
-      <div class="hero-meta-item">🏆 每組前 15 名獲獎</div>
-      <div class="hero-meta-item">📅 獎勵發放 5/29 週五</div>
+      <div class="hero-meta-item">🏆 每組前 20 名獲獎</div>
+      <div class="hero-meta-item">📅 獎勵發放 6/1 週一</div>
       <div class="hero-meta-item">⏱️ 限時競賽</div>
     </div>
     <a class="play-btn" href="https://learnenglish.britishcouncil.org/free-resources/vocabulary/games/wordshake" target="_blank">
@@ -205,8 +205,8 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
           <span class="group-range">畢業考 85 ~ 100 分</span>
         </div>
       </div>
-      <p class="group-desc">你是英語高手！在競賽中繼續展現你的實力，衝進排行榜前 15 名！</p>
-      <div class="reward-tag">🎁 前 15 名 · 獎勵發放 5/29 (五)</div>
+      <p class="group-desc">你是英語高手！在競賽中繼續展現你的實力，衝進排行榜前 20 名！</p>
+      <div class="reward-tag">🎁 前 20 名 · 獎勵發放 6/1 (一)</div>
       <div class="upload-form">
         <div class="form-row">
           <div class="form-group"><label>班級 <span class="req">*</span></label><input type="text" id="a-class" placeholder="如：309"></div>
@@ -239,7 +239,7 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
         </div>
       </div>
       <p class="group-desc">你的英語能力閃閃發光！把握這次機會，在同組競賽中脫穎而出！</p>
-      <div class="reward-tag">🎁 前 15 名 · 獎勵發放 5/29 (五)</div>
+      <div class="reward-tag">🎁 前 20 名 · 獎勵發放 6/1 (一)</div>
       <div class="upload-form">
         <div class="form-row">
           <div class="form-group"><label>班級 <span class="req">*</span></label><input type="text" id="b-class" placeholder="如：309"></div>
@@ -272,7 +272,7 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
         </div>
       </div>
       <p class="group-desc">創意無限的你！用你獨特的方式挑戰 WordShake，一樣有機會贏得大獎！</p>
-      <div class="reward-tag">🎁 前 15 名 · 獎勵發放 5/29 (五)</div>
+      <div class="reward-tag">🎁 前 20 名 · 獎勵發放 6/1 (一)</div>
       <div class="upload-form">
         <div class="form-row">
           <div class="form-group"><label>班級 <span class="req">*</span></label><input type="text" id="c-class" placeholder="如：309"></div>
@@ -303,7 +303,7 @@ input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
   <div class="success-card">
     <div class="success-icon">🎉</div>
     <div class="success-title">上傳成功！</div>
-    <div class="success-msg" id="success-msg">你的成果已成功提交！<br>老師會審核後公布前 15 名名單，<br>獎勵將於 <strong>5/29（五）</strong> 發放。</div>
+    <div class="success-msg" id="success-msg">你的成果已成功提交！<br>老師會審核後公布前 20 名名單，<br>獎勵將於 <strong>6/1（一）</strong> 發放。</div>
     <button class="success-close" onclick="document.getElementById('success-overlay').classList.remove('open')">好的，我知道了 👍</button>
   </div>
 </div>
@@ -406,7 +406,7 @@ async function submitForm(cat, groupName) {
     resetForm(cat);
     document.getElementById('success-msg').innerHTML =
       `<strong>${name}</strong> 同學，你的成果已成功提交到 <strong>${groupName}</strong> 組！<br><br>` +
-      `老師會審核後公布前 15 名名單，<br>獎勵將於 <strong>5/29（五）</strong> 發放，加油！🎊`;
+      `老師會審核後公布前 20 名名單，<br>獎勵將於 <strong>6/1（一）</strong> 發放，加油！🎊`;
     document.getElementById('success-overlay').classList.add('open');
 
   } catch (e) {
